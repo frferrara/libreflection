@@ -1,6 +1,6 @@
 class testClass(object):
     def __init__(self):
-        self.text = "this is a test."
+        self.text = "This is a test."
     
     def printout(self):
         print self.text
