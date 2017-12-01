@@ -7,7 +7,7 @@ import traceback
 from importlib import import_module
 
 
-def import_mod(name, pkg):
+def import_mod(name, pkg=None):
     """
     Import a module using reflection.
     inputs:
@@ -16,16 +16,26 @@ def import_mod(name, pkg):
     outputs:
     - ret: imported module (None, if exception occurs)
     """
+    # Initialize
     ret = None
+    if pkg is None:
+        pkg_str = " "
+    else:
+        pkg_str = " in package %s "
+
+    # Import the module
     try:
         ret = import_module(name, pkg)
-        output = "Success! Module %s in package %s imported."
+        output = "Success! Module %s" + pkg_str + "imported."
     except ImportError:
-        output = "Fail! Module %s in package %s not imported."
+        output = "Fail! Module %s" + pkg_str + "not imported."
         traceback.print_stack()
         traceback.print_exc()
     finally:
-        print output %(name, pkg)
+        if pkg is None:
+            print output %name
+        else:
+            print output %(name, pkg)
 
     return ret
 
@@ -38,7 +48,10 @@ def get_attr(name, mod):
     outputs:
     - ret: attribute of the module (None, if exception occurs)
     """
+    # Initialize
     ret = None
+
+    # Get the attribute
     try:
         ret = getattr(mod, name)
         output = "Success! Attribute %s in module %s found."
@@ -52,6 +65,7 @@ def get_attr(name, mod):
     return ret
 
 
+# Test the library
 if __name__ == "__main__":
     # Import nonexisting module
     BLA_MOD = import_mod(".bla", "pkg.sub_pkg")
@@ -66,3 +80,6 @@ if __name__ == "__main__":
     TEST_ATTR = get_attr("testClass", TEST_MOD)
     TEST_CLASS = TEST_ATTR()
     TEST_CLASS.printout()
+
+    # Import ROS Pose message
+    GEOMETRY_MSGS = import_mod("geometry_msgs")
