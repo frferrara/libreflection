@@ -93,3 +93,7 @@ if __name__ == "__main__":
     pose_msg.orientation.z = 6
     pose_msg.orientation.w = 7
     print(pose_msg)
+
+    # Import the protobuf
+    POSE_PROTO_MOD = import_mod("._Pose_pb2", "protobuf")
+    
