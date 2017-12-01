@@ -42,7 +42,7 @@ def get_attr(name, mod):
     try:
         ret = getattr(mod, name)
         output = "Success! Attribute %s in module %s found."
-    except:
+    except TypeError:
         output = "Fail! Attribute %s in module %s not found."
         traceback.print_stack()
         traceback.print_exc()
@@ -64,5 +64,5 @@ if __name__ == "__main__":
 
     # Get test class
     TEST_ATTR = get_attr("testClass", TEST_MOD)
-    test_class = TEST_ATTR()
-    test_class.printout()
+    TEST_CLASS = TEST_ATTR()
+    TEST_CLASS.printout()
