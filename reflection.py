@@ -29,23 +29,25 @@ def import_mod(name, pkg):
 
     return ret
 
-def get_attr(mod, name):
+def get_attr(name, mod):
     """
     Get an attribute for a module such as a class, a function, etc.
     inputs:
-    - mod:  module (e.g. output from import_mod)
     - name: attribute of the module (e.g. class or function name, etc.)
+    - mod:  module (e.g. output from import_mod)
     outputs:
     - ret: attribute of the module (None, if exception occurs)
     """
     ret = None
     try:
-        ret = il.getattr(mod, name)
+        ret = getattr(mod, name)
         output = "Success! Attribute %s in module %s found."
     except:
         output = "Fail! Attribute %s in module %s not found."
+        traceback.print_stack()
+        traceback.print_exc()
     finally:
-        print output %(mod, name)
+        print output %(name, mod)
 
     return ret
 
@@ -61,7 +63,6 @@ if __name__ == "__main__":
     TEST_ATTR = get_attr(TEST_MOD, "nonExistent")
 
     # Get test class
-    print(TEST_MOD)
-    # TEST_ATTR = get_attr(TEST_MOD, "testClass")
-    # test_class = TEST_ATTR()
-    # test_class.printout()
+    TEST_ATTR = get_attr("testClass", TEST_MOD)
+    test_class = TEST_ATTR()
+    test_class.printout()
