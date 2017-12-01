@@ -82,4 +82,14 @@ if __name__ == "__main__":
     TEST_CLASS.printout()
 
     # Import ROS Pose message
-    GEOMETRY_MSGS = import_mod("geometry_msgs")
+    GEOMETRY_MSGS = import_mod("._Pose", "geometry_msgs.msg")
+    POSE = get_attr("Pose", GEOMETRY_MSGS)
+    pose_msg = POSE()
+    pose_msg.position.x = 1
+    pose_msg.position.y = 2
+    pose_msg.position.z = 3
+    pose_msg.orientation.x = 4
+    pose_msg.orientation.y = 5
+    pose_msg.orientation.z = 6
+    pose_msg.orientation.w = 7
+    print(pose_msg)
