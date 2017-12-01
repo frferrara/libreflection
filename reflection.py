@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
     # Import test module
     TEST_MOD = import_mod(".test_ref", "pkg.sub_pkg")
-    assert TEST_MOD != None
+    assert TEST_MOD is not None
 
     # Get non existent attribute
     TEST_ATTR = get_attr(TEST_MOD, "nonExistent")
@@ -103,7 +103,8 @@ if __name__ == "__main__":
     # Set an attribute correctly
     set_attr("text", TEST_CLASS, "This is a text set through reflection.")
     TEST_CLASS.printout()
-    assert TEST_CLASS.text == "This is a text set through reflection."
+    COMP = TEST_CLASS.text == "This is a text set through reflection."
+    assert COMP is True
 
     # Import ROS Pose message
     GEOMETRY_MSGS = import_mod("._Pose", "geometry_msgs.msg")
