@@ -1,2 +1,4 @@
 *.pyc
 *.pyo
+.desktop
+_Pose_pb2.py
